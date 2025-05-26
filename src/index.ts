@@ -23,7 +23,8 @@ io.on("connection", (socket) => {
 
     socket.on("sendMessage", (data) => {
         const { room } = data;
-        io.to(room).emit(`message`, data);
+        io.to(room).emit(`message`, { ...data });
+        logger.info(` ▫️ new Message from { ${id} }: (${data.message}) ▫️ `)
     })
 
     socket.on("leave", (data) => {
